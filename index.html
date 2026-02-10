@@ -229,27 +229,64 @@
             background: var(--color-bg-primary);
         }
         
-        .gallery-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            align-items: start;
+        .product-gallery {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
         }
         
-        .main-image {
-            background: var(--color-bg-card);
-            border-radius: 30px;
-            padding: 40px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
-            border: 1px solid rgba(255,255,255,0.05);
-            position: sticky;
-            top: 100px;
+        /* Image principale */
+        .main-image-container {
+            background: var(--color-bg-secondary);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            margin-bottom: 30px;
+            border: 1px solid rgba(125, 186, 183, 0.2);
         }
         
-        .main-image img {
+        .main-image-container img {
             width: 100%;
             height: auto;
-            border-radius: 20px;
+            border-radius: 15px;
+            display: block;
+        }
+        
+        /* Miniatures */
+        .thumbnails-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .thumbnail {
+            background: var(--color-bg-tertiary);
+            border-radius: 12px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .thumbnail:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(125, 186, 183, 0.3);
+            border-color: var(--color-accent);
+        }
+        
+        .thumbnail.active {
+            border-color: var(--color-accent);
+            box-shadow: 0 0 20px rgba(125, 186, 183, 0.5);
+        }
+        
+        .thumbnail img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            display: block;
         }
         
         .product-image-placeholder {
@@ -263,77 +300,65 @@
             background: rgba(125,186,183,0.1);
             border-radius: 20px;
         }
-        
-        .thumbnails {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
-            margin-top: 20px;
-        }
-        
-        .thumbnail {
-            cursor: pointer;
-            border-radius: 15px;
-            overflow: hidden;
-            border: 2px solid transparent;
-            transition: all 0.3s;
-            background: rgba(255,255,255,0.05);
-            padding: 10px;
-        }
-        
-        .thumbnail:hover,
-        .thumbnail.active {
-            border-color: var(--color-accent);
-            transform: scale(1.05);
-        }
-        
-        .thumbnail img {
-            width: 100%;
-            height: auto;
-            border-radius: 10px;
-        }
-        
-        .product-details {
-            background: var(--color-bg-card);
-            border-radius: 30px;
-            padding: 40px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
-            border: 1px solid rgba(255,255,255,0.05);
-        }
-        
-        .product-details h2 {
-            font-size: 36px;
-            margin-bottom: 20px;
-            color: var(--color-text-primary);
-        }
-        
-        .product-details p {
-            font-size: 18px;
-            line-height: 1.8;
-            color: var(--color-text-muted);
-            margin-bottom: 30px;
-        }
-        
-        .highlights {
-            list-style: none;
-        }
-        
-        .highlights li {
-            padding: 15px 0;
+
+        /* Video Section */
+        .video-showcase {
+            background: var(--color-bg-primary);
+            padding: 60px 0;
             border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .video-showcase h2 {
+            text-align: center;
+            font-size: 36px;
+            font-weight: 800;
+            color: var(--color-text-primary);
+            margin-bottom: 40px;
+        }
+
+        .video-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--color-bg-secondary);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(125, 186, 183, 0.2);
+        }
+
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* Ratio 16:9 */
+            height: 0;
+            overflow: hidden;
+            border-radius: 15px;
+            background: var(--color-bg-tertiary);
+        }
+
+        .video-wrapper video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 15px;
+            object-fit: cover;
+        }
+
+        .video-caption {
+            text-align: center;
+            margin-top: 20px;
             font-size: 18px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
+            color: var(--color-text-secondary);
+            font-weight: 500;
         }
         
-        .highlights li:last-child {
-            border-bottom: none;
-        }
-        
-        .highlights li i {
-            color: var(--color-accent);
-            font-size: 24px;
+        /* Responsive pour les miniatures */
+        @media (max-width: 768px) {
+            .thumbnails-container {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
         }
         
         /* Features Section */
@@ -806,8 +831,8 @@
     <header>
         <div class="container">
             <div class="header-content">
-                <div class="logo">🎧 Hoco EW57</div>
-                <a href="#order" class="header-cta">اطلب الآن</a>
+                <div class="logo"><img src="Images/10.png"></div>
+                <a href="#order" class="header-cta">اطلب الآن - دفع عند الاستلام 💳</a>
             </div>
         </div>
     </header>
@@ -815,13 +840,13 @@
     <!-- Hero Section -->
     <section class="hero" id="hero">
         <div class="container">
-            <h1>Hoco EW57 - سماعات Ear Clip اللاسلكية</h1>
+            <h1>Hoco EW57 - سماعات بلوتوث بتقنية Ear Clip</h1>
             <p class="subtitle">راحة مطلقة، صوت نقي، تصميم عصري</p>
             
             <div class="price-box">
                 <div class="old-price">10.000 دج</div>
                 <div class="current-price">7.500 دج</div>
-                <div class="discount-badge">⚡ خصم 25% لفترة محدودة</div>
+                <div class="discount-badge">⚡ 25% لفترة محدودة</div>
             </div>
             
             <a href="#order" class="cta-button">اطلب الآن - دفع عند الاستلام 💳</a>
@@ -831,69 +856,58 @@
     <!-- Product Showcase -->
     <section class="product-showcase">
         <div class="container">
-            <div class="gallery-container">
-                <div>
-                    <div class="main-image" id="mainImage">
-                        <div class="product-image-placeholder">🎧</div>
-                        <img src="Images/1.png" alt="Hoco EW57" style="display: none;" 
+            <div class="product-gallery">
+                <!-- Image principale -->
+                <div class="main-image-container" id="mainImage">
+                    <div class="product-image-placeholder">🎧</div>
+                    <img src="Images/5.png" alt="Hoco EW57 - Vue principale" style="display: none;" 
+                         onload="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                         onerror="this.style.display='none';">
+                </div>
+                
+                <!-- Miniatures -->
+                <div class="thumbnails-container">
+                    <div class="thumbnail active" onclick="changeMainImage(0, this)">
+                        <div class="product-image-placeholder" style="height: 80px; font-size: 40px;">🎧</div>
+                        <img src="Images/1.png" alt="Vue 1" style="display: none;" 
                              onload="this.style.display='block'; this.previousElementSibling.style.display='none';"
                              onerror="this.style.display='none';">
                     </div>
-                    <div class="thumbnails">
-                        <div class="thumbnail active" onclick="changeMainImage(0, this)">
-                            <div style="font-size: 30px; text-align: center;">🎧</div>
-                            <img src="Images/1.png" alt="Vue 1" style="display: none;" 
-                                 onload="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                                 onerror="this.style.display='none';">
-                        </div>
-                        <div class="thumbnail" onclick="changeMainImage(1, this)">
-                            <div style="font-size: 30px; text-align: center;">🎧</div>
-                            <img src="Images/5.png" alt="Vue 2" style="display: none;" 
-                                 onload="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                                 onerror="this.style.display='none';">
-                        </div>
-                        <div class="thumbnail" onclick="changeMainImage(2, this)">
-                            <div style="font-size: 30px; text-align: center;">🎧</div>
-                            <img src="Images/6.png" alt="Vue 3" style="display: none;" 
-                                 onload="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                                 onerror="this.style.display='none';">
-                        </div>
-                        <div class="thumbnail" onclick="changeMainImage(3, this)">
-                            <div style="font-size: 30px; text-align: center;">🎧</div>
-                            <img src="Images/7.png" alt="Vue 4" style="display: none;" 
-                                 onload="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                                 onerror="this.style.display='none';">
-                        </div>
+                    <div class="thumbnail" onclick="changeMainImage(1, this)">
+                        <div class="product-image-placeholder" style="height: 80px; font-size: 40px;">🎧</div>
+                        <img src="Images/5.png" alt="Vue 2" style="display: none;" 
+                             onload="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                             onerror="this.style.display='none';">
+                    </div>
+                    <div class="thumbnail" onclick="changeMainImage(2, this)">
+                        <div class="product-image-placeholder" style="height: 80px; font-size: 40px;">🎧</div>
+                        <img src="Images/6.png" alt="Vue 3" style="display: none;" 
+                             onload="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                             onerror="this.style.display='none';">
+                    </div>
+                    <div class="thumbnail" onclick="changeMainImage(3, this)">
+                        <div class="product-image-placeholder" style="height: 80px; font-size: 40px;">🎧</div>
+                        <img src="Images/7.png" alt="Vue 4" style="display: none;" 
+                             onload="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                             onerror="this.style.display='none';">
                     </div>
                 </div>
-                
-                <div class="product-details">
-                    <h2>تصميم ثوري في عالم السماعات</h2>
-                    <p>سماعات Hoco EW57 تقدم لك تجربة استماع فريدة مع تصميم Ear Clip المبتكر الذي يوفر راحة استثنائية طوال اليوم. تقنية البلوتوث 5.3 تضمن اتصالاً مستقراً وصوتاً نقياً بدون تشويش.</p>
-                    
-                    <ul class="highlights">
-                        <li>
-                            <i class="fas fa-battery-full"></i>
-                            <span>11 ساعة استماع متواصل</span>
-                        </li>
-                        <li>
-                            <i class="fas fa-water"></i>
-                            <span>مقاومة للماء والعرق IPX4</span>
-                        </li>
-                        <li>
-                            <i class="fas fa-volume-up"></i>
-                            <span>صوت عالي الجودة مع باس قوي</span>
-                        </li>
-                        <li>
-                            <i class="fas fa-microphone"></i>
-                            <span>ميكروفون مدمج للمكالمات الواضحة</span>
-                        </li>
-                        <li>
-                            <i class="fas fa-bolt"></i>
-                            <span>شحن سريع USB Type-C</span>
-                        </li>
-                    </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Section -->
+    <section class="video-showcase">
+        <div class="container">
+            <h2>🎬 شاهد المنتج في العمل</h2>
+            <div class="video-container">
+                <div class="video-wrapper">
+                    <video controls autoplay loop muted playsinline preload="metadata" poster="">
+                        <source src="videos/5.mp4" type="video/mp4">
+                        متصفحك لا يدعم تشغيل الفيديو.
+                    </video>
                 </div>
+                <p class="video-caption">✨ اكتشف راحة وجودة Hoco EW57 بنفسك</p>
             </div>
         </div>
     </section>
@@ -1115,12 +1129,7 @@
                             <option value="">اختر الولاية أولاً</option>
                         </select>
                     </div>
-                    
-                    <div class="form-group">
-                        <label>العنوان الكامل *</label>
-                        <input type="text" name="address" required placeholder="الشارع، الحي">
-                    </div>
-                    
+                                        
                     <div class="form-group">
                         <label>اللون المفضل *</label>
                         <select name="color" required>
@@ -1183,11 +1192,6 @@
         </div>
     </footer>
 
-    <!-- Floating CTA -->
-    <a href="#order" class="floating-cta" id="floatingCTA">
-        اطلب الآن - 7.500 دج 🛒
-    </a>
-
     <script>
         // Configuration API Ecotrack/GoLivri
         const ECOTRACK_API_KEY = 'Vio3QKV5fuFDizFmiivXQlBhvgKkB4NATms6qa1IudVegWlMtZQ5G9WhwMq3';
@@ -1205,10 +1209,10 @@
             const wilayaSelect = document.getElementById('wilayaSelect');
             
             try {
-                const response = await fetch(`${ECOTRACK_BASE_URL}/wilayas`, {
+                const response = await fetch(`${ECOTRACK_BASE_URL}/get/wilayas`, {
                     method: 'GET',
                     headers: {
-                        'X-API-ID': ECOTRACK_API_KEY,
+                        'Authorization': `Bearer ${ECOTRACK_API_KEY}`,
                         'Content-Type': 'application/json'
                     }
                 });
@@ -1218,15 +1222,16 @@
                 }
                 
                 const data = await response.json();
-                wilayasData = data.data || [];
+                console.log('Données wilayas reçues:', data); // Debug
+                wilayasData = data.data || data || [];
                 
                 // Remplir le select avec les wilayas
                 wilayaSelect.innerHTML = '<option value="">اختر الولاية</option>';
                 wilayasData.forEach(wilaya => {
                     const option = document.createElement('option');
-                    option.value = wilaya.id;
-                    option.textContent = `${wilaya.id} - ${wilaya.name}`;
-                    option.dataset.wilayaName = wilaya.name;
+                    option.value = wilaya.wilaya_id || wilaya.id;
+                    option.textContent = `${wilaya.wilaya_id || wilaya.id} - ${wilaya.wilaya_name || wilaya.name}`;
+                    option.dataset.wilayaName = wilaya.wilaya_name || wilaya.name;
                     wilayaSelect.appendChild(option);
                 });
                 
@@ -1243,10 +1248,10 @@
             communeSelect.innerHTML = '<option value="">جاري التحميل...</option>';
             
             try {
-                const response = await fetch(`${ECOTRACK_BASE_URL}/communes/${wilayaId}`, {
+                const response = await fetch(`${ECOTRACK_BASE_URL}/get/communes/${wilayaId}`, {
                     method: 'GET',
                     headers: {
-                        'X-API-ID': ECOTRACK_API_KEY,
+                        'Authorization': `Bearer ${ECOTRACK_API_KEY}`,
                         'Content-Type': 'application/json'
                     }
                 });
@@ -1256,15 +1261,17 @@
                 }
                 
                 const data = await response.json();
-                communesData = data.data || [];
+                console.log('Données communes reçues:', data); // Debug
+                communesData = data.data || data || [];
                 
                 // Remplir le select avec les communes
                 communeSelect.innerHTML = '<option value="">اختر البلدية</option>';
                 communesData.forEach(commune => {
                     const option = document.createElement('option');
-                    option.value = commune.id;
-                    option.textContent = commune.name;
-                    option.dataset.communeName = commune.name;
+                    // Utiliser code_postal comme ID si commune_id n'existe pas
+                    option.value = commune.commune_id || commune.id || commune.code_postal;
+                    option.textContent = commune.commune_name || commune.name || commune.nom;
+                    option.dataset.communeName = commune.commune_name || commune.name || commune.nom;
                     communeSelect.appendChild(option);
                 });
                 
@@ -1277,25 +1284,46 @@
             }
         }
         
-        // Récupérer le tarif de livraison
-        async function getDeliveryFees(communeId) {
+        // Variable pour stocker tous les tarifs
+        let allFees = [];
+        
+        // Charger tous les tarifs au démarrage
+        async function loadAllFees() {
             try {
-                const response = await fetch(`${ECOTRACK_BASE_URL}/deliveryfees/${communeId}`, {
+                const response = await fetch(`${ECOTRACK_BASE_URL}/get/fees`, {
                     method: 'GET',
                     headers: {
-                        'X-API-ID': ECOTRACK_API_KEY,
+                        'Authorization': `Bearer ${ECOTRACK_API_KEY}`,
                         'Content-Type': 'application/json'
                     }
                 });
                 
                 if (!response.ok) {
-                    throw new Error('Erreur lors de la récupération des tarifs');
+                    throw new Error('Erreur lors du chargement des tarifs');
                 }
                 
                 const data = await response.json();
+                console.log('Tous les tarifs reçus:', data); // Debug
+                allFees = data.livraison || data.data || [];
                 
-                if (data.data && data.data.tarif) {
-                    deliveryPrice = parseFloat(data.data.tarif);
+            } catch (error) {
+                console.error('Erreur chargement tarifs:', error);
+            }
+        }
+        
+        // Récupérer le tarif de livraison pour une wilaya
+        function getDeliveryFees(wilayaId) {
+            try {
+                // Chercher le tarif correspondant à la wilaya
+                const fee = allFees.find(f => f.wilaya_id == wilayaId);
+                
+                if (fee && fee.tarif) {
+                    deliveryPrice = parseFloat(fee.tarif);
+                    updatePrices();
+                    console.log(`Tarif trouvé pour wilaya ${wilayaId}: ${fee.tarif} DA`);
+                } else {
+                    console.warn(`Aucun tarif trouvé pour wilaya ${wilayaId}, utilisation tarif par défaut`);
+                    deliveryPrice = 600; // Tarif par défaut
                     updatePrices();
                 }
                 
@@ -1322,12 +1350,19 @@
         });
         
         // Gestionnaire de changement de commune
-        document.getElementById('communeSelect').addEventListener('change', async function() {
-            const communeId = this.value;
-            
-            if (communeId) {
-                await getDeliveryFees(communeId);
+        document.getElementById('communeSelect').addEventListener('change', function() {
+            const selectedOption = this.options[this.selectedIndex];
+            if (this.value) {
+                selectedCommune = selectedOption.dataset.communeName;
+                
+                // Récupérer la wilaya sélectionnée
+                const wilayaSelect = document.getElementById('wilayaSelect');
+                const wilayaId = wilayaSelect.value;
+                
+                // Récupérer le tarif basé sur la wilaya (pas la commune)
+                getDeliveryFees(wilayaId);
             } else {
+                selectedCommune = '';
                 deliveryPrice = 0;
                 updatePrices();
             }
@@ -1504,7 +1539,10 @@
         }
         
         // Charger les wilayas au chargement de la page
-        window.addEventListener('DOMContentLoaded', loadWilayas);
+        window.addEventListener('DOMContentLoaded', function() {
+            loadWilayas();
+            loadAllFees();
+        });
     </script>
 </body>
 </html>
