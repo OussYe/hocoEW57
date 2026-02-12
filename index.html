@@ -6,6 +6,39 @@
     <meta name="description" content="Hoco EW57 - سماعات بلوتوث بتقنية Ear Clip. 11 ساعة استماع، راحة مطلقة. السعر: 7500 دج. توصيل مجاني!">
     <title>Hoco EW57 - سماعات بلوتوث Ear Clip | عرض خاص 7500 دج</title>
     
+    <!-- Meta Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    
+    // Pixel ID : 1531402177934924
+    fbq('init', '1531402177934924');
+    
+    // Événement PageView (automatique)
+    fbq('track', 'PageView');
+    
+    // Événement ViewContent (produit consulté)
+    fbq('track', 'ViewContent', {
+        content_name: 'Hoco EW57 Ear Clip',
+        content_category: 'Electronics',
+        content_ids: ['HOCO-EW57'],
+        content_type: 'product',
+        value: 7500,
+        currency: 'DZD'
+    });
+    </script>
+    <noscript>
+        <img height="1" width="1" style="display:none"
+        src="https://www.facebook.com/tr?id=1531402177934924&ev=PageView&noscript=1"/>
+    </noscript>
+    <!-- End Meta Pixel Code -->
+    
     <!-- Google Fonts - Tajawal (Arabic) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1361,6 +1394,19 @@
                 
                 // Récupérer le tarif basé sur la wilaya (pas la commune)
                 getDeliveryFees(wilayaId);
+                
+                // 🎯 Événement Meta Pixel : AddToCart (intention d'achat forte)
+                if (typeof fbq !== 'undefined') {
+                    fbq('track', 'AddToCart', {
+                        content_name: 'Hoco EW57 Ear Clip',
+                        content_category: 'Electronics',
+                        content_ids: ['HOCO-EW57'],
+                        content_type: 'product',
+                        value: pricePerUnit * quantity,
+                        currency: 'DZD',
+                        num_items: quantity
+                    });
+                }
             } else {
                 selectedCommune = '';
                 deliveryPrice = 0;
@@ -1421,6 +1467,19 @@
             const wilayaSelect = document.getElementById('wilayaSelect');
             const communeSelect = document.getElementById('communeSelect');
             
+            // 🎯 Événement Meta Pixel : InitiateCheckout (début du processus d'achat)
+            if (typeof fbq !== 'undefined') {
+                fbq('track', 'InitiateCheckout', {
+                    content_name: 'Hoco EW57 Ear Clip',
+                    content_category: 'Electronics',
+                    content_ids: ['HOCO-EW57'],
+                    content_type: 'product',
+                    value: (quantity * pricePerUnit) + deliveryPrice,
+                    currency: 'DZD',
+                    num_items: quantity
+                });
+            }
+            
             const orderData = {
                 name: formData.get('name'),
                 phone: formData.get('phone'),
@@ -1462,6 +1521,19 @@
                 });
                 
                 if (response.ok) {
+                    // 🎯 Événement Meta Pixel : Purchase (CONVERSION FINALE) 
+                    if (typeof fbq !== 'undefined') {
+                        fbq('track', 'Purchase', {
+                            content_name: 'Hoco EW57 Ear Clip',
+                            content_category: 'Electronics',
+                            content_ids: ['HOCO-EW57'],
+                            content_type: 'product',
+                            value: (quantity * pricePerUnit) + deliveryPrice,
+                            currency: 'DZD',
+                            num_items: quantity
+                        });
+                    }
+                    
                     // Succès
                     alert('✅ تم استلام طلبك بنجاح!\n\nسنتصل بك خلال 24 ساعة لتأكيد الطلب.\n\nشكراً لثقتك في Hoco EW57! 🎧');
                     
